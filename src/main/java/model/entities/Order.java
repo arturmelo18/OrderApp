@@ -53,7 +53,16 @@ public class Order{
         throw new OrderException("Product not found");
     }
 
+    public Double totalOrderPrice(){
+        double total = 0.0;
+        for(Product p: products){
+            total += p.getPrice() * p.getQuantity();
+        }
+        return total;
+    }
+
     @Override
+    @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("========ORDER========");

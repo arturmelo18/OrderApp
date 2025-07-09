@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import model.entities.Order;
+import model.entities.OrderStatus;
 import model.entities.Product;
 import model.entities.UsedProduct;
 import model.exceptions.OrderException;
@@ -17,12 +19,14 @@ public class Program{
     @SuppressWarnings("CallToPrintStackTrace")
     public static void main(String[] args) {
         
+        //Creating the lists that I will use in this application
         String path = "/home/artur/Documentos/Vscode_projects/Java/TesteLambda/Products.txt";
+        Scanner sc = new Scanner(System.in);
         List<Product> products = new ArrayList<>();
         List<Order> orders = new ArrayList<>();
 
         try(BufferedReader br = new BufferedReader(new FileReader(path))){
-            
+            //Reading products from a file
             String line = br.readLine();
             while(line != null){
                 String[]fields = line.split(",");
@@ -36,11 +40,44 @@ public class Program{
                 ));
                 line = br.readLine();
             }
-            products.forEach(System.out::println);
+            int option = 0;
+            do { 
+                //Showing the menu to users
+                System.out.println("=======================================");
+                System.out.println("1)Place an order");
+                System.out.println("2)See the products");
+                System.out.println("3)See the orders");
+                System.out.println("4)Exit the application");
+                System.out.println("=======================================");
+
+                switch(option){
+                    case 1 -> {
+                        products.forEach(System.out::println);
+                        System.out.println("These are the products available in our store");
+                        System.out.println("Please, select the product ID and the product's quantity");
+                        char keep = 's';
+                        Order order = new Order(1, OrderStatus.PROCESSING);
+                        while(keep == 's'){
+                            System.out.println("Enter the product ID:");
+                            int id = sc.nextInt();
+                            System.out.println("Enter the product quantity:");
+                            int quantity = sc.nextInt();
+                            Product p = new UsedProduct();
+                            p.setId(id);
+                        }
+                    }
+                    case 2 -> products.forEach(System.out::println);
+                    case 3 -> orders.forEach(System.out::println);
+                    case 4 -> System.out.println("Thank you for using this app and see you soon!");
+                    default -> System.out.println("Choose a correct option!");
+                }
+            } while (option != 3);
         } catch(IOException | OrderException e){
             e.printStackTrace();
         } catch(RuntimeException e){
             e.printStackTrace();
+        } finally{
+            sc.close();
         }
     }
 
