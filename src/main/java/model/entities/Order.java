@@ -1,14 +1,16 @@
 package model.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.exceptions.OrderException;
+
 
 public class Order{
 
     private Integer id;
     private OrderStatus orderStatus;
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
     public Order(){
     }
@@ -40,7 +42,6 @@ public class Order{
 
     public void addProducts(Product product){
         products.add(product);
-        System.out.println("Product added");
     }
 
     public String removeProducts(Product product){
@@ -65,12 +66,12 @@ public class Order{
     @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("========ORDER========");
+        sb.append("========ORDER========\n");
         sb.append("Id: " + getId() + "\n");
         sb.append("OrderStatus: " + getOrderStatus() + "\n");
         sb.append("Products:\n");
         for(Product p:products){
-            sb.append(p.getName());
+            sb.append(p.getName() + "\n");
         }
         return sb.toString();
     }

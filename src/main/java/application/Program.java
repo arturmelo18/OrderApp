@@ -49,6 +49,8 @@ public class Program{
                 System.out.println("3)See the orders");
                 System.out.println("4)Exit the application");
                 System.out.println("=======================================");
+                System.out.println("Select an option:");
+                option = sc.nextInt();
 
                 switch(option){
                     case 1 -> {
@@ -62,16 +64,22 @@ public class Program{
                             int id = sc.nextInt();
                             System.out.println("Enter the product quantity:");
                             int quantity = sc.nextInt();
-                            Product p = new UsedProduct();
-                            p.setId(id);
+                            Product p1 = products.stream().filter(p -> p.getId() == id).findFirst().get();
+                            p1.setQuantity(quantity);
+                            order.addProducts(p1);
+                            System.out.println("Do you want to add another product in your order? (s/n)");
+                            sc.nextLine();
+                            keep = sc.nextLine().toLowerCase().charAt(0);
                         }
+                        orders.add(order);
+                        System.out.println("Your order has been accepted, you will receive it soon!");
                     }
                     case 2 -> products.forEach(System.out::println);
                     case 3 -> orders.forEach(System.out::println);
                     case 4 -> System.out.println("Thank you for using this app and see you soon!");
                     default -> System.out.println("Choose a correct option!");
                 }
-            } while (option != 3);
+            } while (option != 4);
         } catch(IOException | OrderException e){
             e.printStackTrace();
         } catch(RuntimeException e){
