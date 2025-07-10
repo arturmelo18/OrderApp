@@ -11,7 +11,7 @@ public class UsedProduct extends Product{
 
     public UsedProduct(){
     }
-
+    
     public UsedProduct(Integer id, String name, Double price, Integer quantity, char type, LocalDate productionDate){
         super(id, name, price, quantity, type);
         this.productionDate = productionDate;

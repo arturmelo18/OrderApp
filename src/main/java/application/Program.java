@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import model.entities.ImportedProduct;
 import model.entities.Order;
 import model.entities.OrderStatus;
 import model.entities.Product;
@@ -30,14 +31,26 @@ public class Program{
             String line = br.readLine();
             while(line != null){
                 String[]fields = line.split(",");
-                products.add(new UsedProduct(
-                    Integer.valueOf(fields[0]),
-                    fields[1],
-                    Double.valueOf(fields[2]),
-                    Integer.valueOf(fields[3]),
-                    fields[4].charAt(0),
-                    LocalDate.parse(fields[5])
-                ));
+                if(fields[4].toLowerCase().charAt(0) == 'u'){
+                    products.add(new UsedProduct(
+                        Integer.valueOf(fields[0]),
+                        fields[1],
+                        Double.valueOf(fields[2]),
+                        Integer.valueOf(fields[3]),
+                        fields[4].charAt(0),
+                        LocalDate.parse(fields[5])
+                    ));
+                } else{
+                    products.add(new ImportedProduct(
+                        Integer.valueOf(fields[0]),
+                        fields[1],
+                        Double.valueOf(fields[2]),
+                        Integer.valueOf(fields[3]),
+                        fields[4].charAt(0),
+                        Double.valueOf(fields[5])
+                    ));
+                }
+                
                 line = br.readLine();
             }
             int option = 0;

@@ -1,6 +1,7 @@
-model/exceptions/OrderException.class
 model/entities/Order.class
-model/entities/OrderStatus.class
 application/Program.class
 model/entities/Product.class
+model/exceptions/OrderException.class
+model/entities/ImportedProduct.class
+model/entities/OrderStatus.class
 model/entities/UsedProduct.class
